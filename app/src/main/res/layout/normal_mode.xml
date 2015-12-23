@@ -96,11 +96,10 @@
                 android:text="運動狀況"
                 android:id="@+id/textView5" />
 
-            <EditText
+            <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText6"
-                android:layout_marginLeft="5dp" />
+                android:id="@+id/spinner2" />
 
         </LinearLayout>
 
