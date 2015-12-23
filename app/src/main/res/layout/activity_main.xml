@@ -5,16 +5,43 @@
     android:background="#FFFFFF"
     tools:context="com.android.jianhua.hidenwindows.FullscreenActivity">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_gravity="left|top" />
-    <Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="New Button"
-    android:id="@+id/button1"
-    android:layout_gravity="right|top" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="150dp"
+                android:id="@+id/imageView"
+                android:background="#ff0000"
+                android:layout_margin="5dp" />
+
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="150dp"
+                android:id="@+id/imageView2"
+                android:layout_margin="5dp"
+                android:background="#0073ff" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/imageView3"
+                android:background="#00FF00"
+                android:layout_margin="5dp" />
+        </LinearLayout>
+    </LinearLayout>
+
 </FrameLayout>
