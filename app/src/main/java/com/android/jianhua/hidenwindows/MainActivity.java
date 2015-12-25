@@ -28,7 +28,7 @@ import com.android.jianhua.hidenwindows.DataForm.BodyData;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    ImageView imageView, imageView1, imageView2;
+    ImageView imageView, imageView1, imageView2, imageView3;
     Button btn, btn1;
     ArrayList<BodyData> bodyData = new ArrayList<BodyData>();
     ListBodyDtatAdapter myArrayAdapter;
@@ -55,22 +55,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imageView = (ImageView) findViewById(R.id.imageView);
         imageView1 = (ImageView) findViewById(R.id.imageView2);
         imageView2 = (ImageView) findViewById(R.id.imageView3);
+        imageView3 = (ImageView) findViewById(R.id.imageView4);
         imageView.setOnClickListener(this);
         imageView1.setOnClickListener(this);
         imageView2.setOnClickListener(this);
+        imageView3.setOnClickListener(this);
     }
 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.imageView:
                 Toast.makeText(MainActivity.this, "正常模式", Toast.LENGTH_SHORT).show();
+                FoodDetail_Normal();
                 break;
             case R.id.imageView2:
                 Toast.makeText(MainActivity.this, "減重模式", Toast.LENGTH_SHORT).show();
+                FoodDetail_Reduce();
                 break;
             case R.id.imageView3:
                 Toast.makeText(MainActivity.this, "設定", Toast.LENGTH_SHORT).show();
                 SettingProfile();
+                break;
+            case R.id.imageView4:
+                MainActivity.this.finish();
                 break;
             case R.id.button2:
                 HomePage();
@@ -79,6 +86,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 AddBodyData();
                 break;
         }
+    }
+
+    private void FoodDetail_Reduce() {
+        setContentView(R.layout.food_memory);
+    }
+
+    private void FoodDetail_Normal() {
+        setContentView(R.layout.food_memory);
     }
 
     private void AddBodyData() {
