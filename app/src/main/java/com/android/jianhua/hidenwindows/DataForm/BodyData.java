@@ -9,4 +9,5 @@ public class BodyData {
     public int old;
     public boolean gender;
     public Double sport;
+    public String time;
 }

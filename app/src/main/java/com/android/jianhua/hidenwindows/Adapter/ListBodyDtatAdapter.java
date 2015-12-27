@@ -30,7 +30,7 @@ public class ListBodyDtatAdapter extends ArrayAdapter<BodyData> {
         this.bodyData = bodyData;
     }
     static class ViewHolder{
-        TextView length, weigth, old, gender, sport;
+        TextView length, weigth, old, gender, sport, time;
     }
 
     @Override
@@ -57,8 +57,24 @@ public class ListBodyDtatAdapter extends ArrayAdapter<BodyData> {
         holder.length.setText(String.valueOf(bodyData.get(position).length));
         holder.weigth.setText(String.valueOf(bodyData.get(position).weigth));
         holder.old.setText(String.valueOf(bodyData.get(position).old));
-        holder.gender.setText(String.valueOf(bodyData.get(position).gender));
-        holder.sport.setText(String.valueOf(bodyData.get(position).sport));
+        holder.time.setText(bodyData.get(position).time);
+        if(bodyData.get(position).gender)
+            holder.gender.setText("男生");
+        else
+            holder.gender.setText("女生");
+
+        switch(String.valueOf(bodyData.get(position).sport)){
+            case "1.1":
+                holder.sport.setText("懶散");
+                break;
+            case "1.2":
+                holder.sport.setText("健康");
+                break;
+            case "1.3":
+                holder.sport.setText("積極");
+                break;
+        }
+
     }
 
     private void ComponentInit(View rowView, ViewGroup parent) {
@@ -73,6 +89,9 @@ public class ListBodyDtatAdapter extends ArrayAdapter<BodyData> {
                 .findViewById(R.id.editText10);
         holder.sport = (TextView) rowView
                 .findViewById(R.id.editText11);
+        holder.time = (TextView) rowView
+                .findViewById(R.id.textView22);
+
 
     }
 }
