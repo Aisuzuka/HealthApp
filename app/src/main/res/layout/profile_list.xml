@@ -18,13 +18,14 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView7"
-                android:text="身高"/>
+                android:text="身高:"/>
 
             <TextView
                 android:layout_width="40dp"
@@ -35,13 +36,14 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView8"
-                android:text="體重" />
+                android:text="體重:" />
 
             <TextView
                 android:layout_width="40dp"
@@ -52,13 +54,15 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
                 android:id="@+id/textView9"
-                android:text="年齡" />
+                android:text="年齡:" />
 
             <TextView
                 android:layout_width="40dp"
@@ -70,18 +74,19 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dip">
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView10"
-                android:text="性別" />
+                android:text="性別:" />
 
             <TextView
                 android:layout_width="40dp"
@@ -92,13 +97,14 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView11"
-                android:text="運動狀況" />
+                android:text="運動狀況:" />
 
             <TextView
                 android:layout_width="40dp"

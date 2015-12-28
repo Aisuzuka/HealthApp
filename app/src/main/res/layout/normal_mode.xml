@@ -17,7 +17,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="身高"
+                android:text="身高:"
                 android:id="@+id/textView" />
 
             <EditText
@@ -36,7 +36,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="體重"
+                android:text="體重:"
                 android:id="@+id/textView2" />
 
             <EditText
@@ -55,7 +55,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="年齡"
+                android:text="年齡:"
                 android:id="@+id/textView3" />
 
             <EditText
@@ -74,7 +74,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="性別"
+                android:layout_marginTop="5dip"
+                android:text="性別:"
                 android:id="@+id/textView4" />
 
                 <LinearLayout
@@ -100,12 +101,14 @@
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp" >
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dip">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="運動狀況"
+
+                android:text="運動狀況:"
                 android:id="@+id/textView5" />
 
             <Spinner
