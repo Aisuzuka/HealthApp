@@ -36,6 +36,7 @@ import com.android.jianhua.hidenwindows.Adapter.ListBodyDtatAdapter;
 import com.android.jianhua.hidenwindows.Adapter.ListFoodAdapter;
 import com.android.jianhua.hidenwindows.DataForm.BodyData;
 import com.android.jianhua.hidenwindows.Tools.SQLite;
+import com.android.jianhua.hidenwindows.Tools.SQLiteAgent;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String[][] soup = new String[3][];
     String[][] drink = new String[3][];
     String[][] dessert = new String[3][];
-    SQLite sqLite = null;
+    SQLiteAgent sQLiteAgent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,18 +79,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
 //                        | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
 //                        | View.SYSTEM_UI_FLAG_IMMERSIVE);
+        sQLiteAgent = new SQLiteAgent(MainActivity.this);
         flater = LayoutInflater.from(this);
-        openDB();
+        sQLiteAgent.openDB();
         HomePage();
     }
 
-    private void openDB() {
-        sqLite = new SQLite(MainActivity.this);
-    }
-
-    private void closeDB() {
-        sqLite.close();
-    }
 
     private void HomePage() {
         setContentView(R.layout.activity_main);
@@ -282,103 +277,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         data.time = time;
         bodyData.add(data);
         myArrayAdapter.notifyDataSetChanged();
-        addSqlite(bodyData);
+        sQLiteAgent.addSqliteBodyData(bodyData);
     }
 
-    private void addSqlite(ArrayList<BodyData> data) {
-        int size = data.size();
-        JSONArray json1 = new JSONArray();
-        JSONArray json2 = new JSONArray();
-        JSONArray json3 = new JSONArray();
-        JSONArray json4 = new JSONArray();
-        JSONArray json5 = new JSONArray();
-        JSONArray json6 = new JSONArray();
-        for (int i = 0; i < size; i++) {
-            json1.put(data.get(i).length);
-            json2.put(data.get(i).weigth);
-            json3.put(data.get(i).old);
-            json4.put(data.get(i).gender);
-            json5.put(data.get(i).sport);
-            json6.put(data.get(i).time);
-        }
-        JSONObject json = new JSONObject();
-        try {
-            json.put("Length", json1);
-            json.put("Weigth", json2);
-            json.put("Old", json3);
-            json.put("Gender", json4);
-            json.put("Sport", json5);
-            json.put("Time", json6);
-            String arrayList = json.toString();
-
-            SQLiteDatabase db = sqLite.getReadableDatabase();
-            String[] colum = {"_id", "api", "json"};
-            Cursor c = db.query("api",
-                    colum, "api=" + "'" + "BodyData" + "'",
-                    null, null, null, null);
-            ContentValues cv = new ContentValues();
-            if (c.getCount() <= 0) {
-                cv.put("api", "BodyData");
-                cv.put("json", arrayList);
-                long status = db.insert(
-                        "api", null, cv);
-            } else {
-                c.moveToFirst();
-                if ((!(c.getString(2).equals(arrayList))) && (arrayList != null)) {
-                    cv.put("json", arrayList);
-                    int count = db.update(
-                            "api", cv,
-                            "api=" + "'" + "BodyData" + "'",
-                            null);
-                }
-            }
-            c.close();
-            db.close();
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            // Exception
-        }
-    }
-
-    private void showSqlite() {
-
-        SQLiteDatabase db = sqLite.getReadableDatabase();
-        String[] colum = {"_id", "api", "json"};
-        Cursor c = db.query("api", colum, "api=" + "'" + "BodyData"
-                + "'", null, null, null, null);
-        if (c.getCount() <= 0) {
-            db.close();
-            return;
-        }
-        c.moveToFirst();
-        String result = c.getString(2);
-        db.close();
-        try {
-            JSONObject json = new JSONObject(result);
-            int size = json.getJSONArray("Length").length();
-            BodyData[] bodyData = new BodyData[size];
-            this.bodyData.clear();
-            for (int i = 0; i < size; i++) {
-                bodyData[i] = new BodyData();
-                bodyData[i].length = json.getJSONArray("Length").getDouble(i);
-                bodyData[i].weigth = json.getJSONArray("Weigth").getDouble(i);
-                bodyData[i].old = json.getJSONArray("Old").getInt(i);
-                bodyData[i].gender = json.getJSONArray("Gender").getBoolean(i);
-                bodyData[i].sport = json.getJSONArray("Sport").getDouble(i);
-                bodyData[i].time = json.getJSONArray("Time").getString(i);
-                this.bodyData.add(bodyData[i]);
-            }
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            // Exception
-        }
-    }
 
     private void SettingProfile() {
         view_counter = view_counter + 1;
@@ -386,7 +287,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         main.removeAllViews();
         main.addView(view[view_counter]);
         btn1 = (Button) view[view_counter].findViewById(R.id.button3);
-        showSqlite();
+        bodyData = sQLiteAgent.showSqliteBodyData();
         ListDataBase();
         ListSport();
         SetRadioBox();
