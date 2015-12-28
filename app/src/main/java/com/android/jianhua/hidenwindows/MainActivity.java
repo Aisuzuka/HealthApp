@@ -343,6 +343,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         foodData = sQLiteAgent.showSqliteFoodData();
     }
 
+    private int ReportTodayCalorie() {
+        double calorie = 0;
+        int count = bodyData.size();
+        calorie = (665 + 1.38 * bodyData.get(count).weigth + 5 * bodyData.get(count).length - 6.8 * bodyData.get(count).old) * bodyData.get(count).sport;
+        return (int) calorie;
+    }
+
     private void AddBodyData() {
         BodyData data = new BodyData();
         EditText length = (EditText) view[view_counter].findViewById(R.id.editText2);
