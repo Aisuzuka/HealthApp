@@ -28,13 +28,13 @@
                     android:id="@+id/textView13"
                     android:textSize="40dp" />
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="81dp"
-                    android:id="@+id/editText12"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="0.34"
-                    android:textColor="#e50c0c" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="60dip"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/textView27"
+                    android:textSize="60dp" />
 
             </LinearLayout>
 
