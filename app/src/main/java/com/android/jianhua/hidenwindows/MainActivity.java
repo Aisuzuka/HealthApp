@@ -35,6 +35,7 @@ import android.widget.Toast;
 import com.android.jianhua.hidenwindows.Adapter.ListBodyDtatAdapter;
 import com.android.jianhua.hidenwindows.Adapter.ListFoodAdapter;
 import com.android.jianhua.hidenwindows.DataForm.BodyData;
+import com.android.jianhua.hidenwindows.DataForm.FoodData;
 import com.android.jianhua.hidenwindows.Tools.SQLite;
 import com.android.jianhua.hidenwindows.Tools.SQLiteAgent;
 
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView imageView, imageView1, imageView2, imageView3;
     Button btn, btn1;
     ArrayList<BodyData> bodyData = new ArrayList<BodyData>();
+    ArrayList<FoodData> foodData = new ArrayList<FoodData>();
     ListBodyDtatAdapter myArrayAdapter;
     Double length, sport, weigth;
     FrameLayout main;
@@ -165,24 +167,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void ShowFoodList() {
         view_counter = view_counter + 1;
+        final FoodData data = new FoodData();
         view[view_counter] = flater.inflate(R.layout.food_list, null);
         main.removeAllViews();
         main.addView(view[view_counter]);
+        Button btn = (Button) view[view_counter].findViewById(R.id.button4);
         Spinner sp = (Spinner) view[view_counter].findViewById(R.id.spinner);
         Spinner sp1 = (Spinner) view[view_counter].findViewById(R.id.spinner3);
         Spinner sp2 = (Spinner) view[view_counter].findViewById(R.id.spinner4);
         Spinner sp3 = (Spinner) view[view_counter].findViewById(R.id.spinner5);
         Spinner sp4 = (Spinner) view[view_counter].findViewById(R.id.spinner6);
-        CheckBox cb1 = (CheckBox) view[view_counter].findViewById(R.id.checkBox);
-        CheckBox cb2 = (CheckBox) view[view_counter].findViewById(R.id.checkBox2);
-        CheckBox cb3 = (CheckBox) view[view_counter].findViewById(R.id.checkBox3);
-        CheckBox cb4 = (CheckBox) view[view_counter].findViewById(R.id.checkBox4);
-        CheckBox cb5 = (CheckBox) view[view_counter].findViewById(R.id.checkBox5);
+        final CheckBox cb1 = (CheckBox) view[view_counter].findViewById(R.id.checkBox);
+        final CheckBox cb2 = (CheckBox) view[view_counter].findViewById(R.id.checkBox2);
+        final CheckBox cb3 = (CheckBox) view[view_counter].findViewById(R.id.checkBox3);
+        final CheckBox cb4 = (CheckBox) view[view_counter].findViewById(R.id.checkBox4);
+        final CheckBox cb5 = (CheckBox) view[view_counter].findViewById(R.id.checkBox5);
         final LinearLayout ll1 = (LinearLayout) view[view_counter].findViewById(R.id.breakfast);
-        final LinearLayout ll3 = (LinearLayout) view[view_counter].findViewById(R.id.mainmenu);
-        final LinearLayout ll4 = (LinearLayout) view[view_counter].findViewById(R.id.soup);
-        final LinearLayout ll2 = (LinearLayout) view[view_counter].findViewById(R.id.drink);
+        final LinearLayout ll2 = (LinearLayout) view[view_counter].findViewById(R.id.mainmenu);
+        final LinearLayout ll3 = (LinearLayout) view[view_counter].findViewById(R.id.soup);
+        final LinearLayout ll4 = (LinearLayout) view[view_counter].findViewById(R.id.drink);
         final LinearLayout ll5 = (LinearLayout) view[view_counter].findViewById(R.id.dessert);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+                String time = sDateFormat.format(new java.util.Date());
+                if (!cb1.isChecked())
+                    data.breakfast = 0;
+                if (!cb2.isChecked())
+                    data.main_menu = 0;
+                if (!cb3.isChecked())
+                    data.soup = 0;
+                if (!cb4.isChecked())
+                    data.drink = 0;
+                if (!cb5.isChecked())
+                    data.desert = 0;
+                data.time = time;
+                foodData.add(data);
+                sQLiteAgent.addSqliteFoodData(foodData);
+            }
+        });
         cb1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -233,6 +257,61 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FoodSpinner(sp2, soup);
         FoodSpinner(sp3, drink);
         FoodSpinner(sp4, dessert);
+        sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                data.breakfast = position + 1;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        sp1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                data.main_menu = position + 1;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        sp2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                data.soup = position + 1;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        sp3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                data.drink = position + 1;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        sp4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                data.desert = position + 1;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void FoodSpinner(Spinner sp, String[][] item) {
@@ -253,10 +332,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void FoodDetail_Normal() {
         view_counter = view_counter + 1;
         view[view_counter] = flater.inflate(R.layout.food_memory, null);
+        ListFoodData();
         main.removeAllViews();
         main.addView(view[view_counter]);
         Button btn = (Button) view[view_counter].findViewById(R.id.button);
         btn.setOnClickListener(this);
+    }
+
+    private void ListFoodData() {
+        foodData = sQLiteAgent.showSqliteFoodData();
     }
 
     private void AddBodyData() {
@@ -288,7 +372,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         main.addView(view[view_counter]);
         btn1 = (Button) view[view_counter].findViewById(R.id.button3);
         bodyData = sQLiteAgent.showSqliteBodyData();
-        ListDataBase();
+        ListBodyData();
         ListSport();
         SetRadioBox();
         btn1.setOnClickListener(this);
@@ -337,7 +421,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    private void ListDataBase() {
+    private void ListBodyData() {
         ListView ls = (ListView) view[view_counter].findViewById(R.id.listView);
         myArrayAdapter = new ListBodyDtatAdapter(MainActivity.this, bodyData);
         ls.setAdapter(myArrayAdapter);
