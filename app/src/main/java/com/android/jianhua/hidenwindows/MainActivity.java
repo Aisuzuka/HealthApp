@@ -34,6 +34,7 @@ import android.widget.Toast;
 
 import com.android.jianhua.hidenwindows.Adapter.ListBodyDtatAdapter;
 import com.android.jianhua.hidenwindows.Adapter.ListFoodAdapter;
+import com.android.jianhua.hidenwindows.Adapter.ListFoodListAdapter;
 import com.android.jianhua.hidenwindows.DataForm.BodyData;
 import com.android.jianhua.hidenwindows.DataForm.FoodData;
 import com.android.jianhua.hidenwindows.Tools.SQLite;
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ArrayList<BodyData> bodyData = new ArrayList<BodyData>();
     ArrayList<FoodData> foodData = new ArrayList<FoodData>();
     ListBodyDtatAdapter myArrayAdapter;
+    ListFoodListAdapter myArrayAdapter2;
     Double length, sport, weigth;
     FrameLayout main;
     int old;
@@ -168,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void ShowFoodList() {
         view_counter = view_counter + 1;
         final FoodData data = new FoodData();
-        view[view_counter] = flater.inflate(R.layout.food_list, null);
+        view[view_counter] = flater.inflate(R.layout.food_chose, null);
         main.removeAllViews();
         main.addView(view[view_counter]);
         Button btn = (Button) view[view_counter].findViewById(R.id.button4);
@@ -205,6 +207,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 data.time = time;
                 foodData.add(data);
                 sQLiteAgent.addSqliteFoodData(foodData);
+                view_counter = view_counter - 1;
+                main.removeAllViews();
+                main.addView(view[view_counter]);
+                myArrayAdapter2.notifyDataSetChanged();
             }
         });
         cb1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -325,6 +331,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void FoodDetail_Reduce() {
         view_counter = view_counter + 1;
         view[view_counter] = flater.inflate(R.layout.food_memory, null);
+        ListFoodData();
+        ListView ls = (ListView) view[view_counter].findViewById(R.id.listView2);
+        myArrayAdapter2 = new ListFoodListAdapter(MainActivity.this, foodData);
+        ls.setAdapter(myArrayAdapter2);
+        myArrayAdapter2.notifyDataSetChanged();
         main.removeAllViews();
         main.addView(view[view_counter]);
     }
@@ -333,6 +344,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         view_counter = view_counter + 1;
         view[view_counter] = flater.inflate(R.layout.food_memory, null);
         ListFoodData();
+        ListView ls = (ListView) view[view_counter].findViewById(R.id.listView2);
+        myArrayAdapter2 = new ListFoodListAdapter(MainActivity.this, foodData);
+        ls.setAdapter(myArrayAdapter2);
+        myArrayAdapter2.notifyDataSetChanged();
         main.removeAllViews();
         main.addView(view[view_counter]);
         Button btn = (Button) view[view_counter].findViewById(R.id.button);
