@@ -30,6 +30,7 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.jianhua.hidenwindows.Adapter.ListBodyDtatAdapter;
@@ -86,6 +87,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sQLiteAgent = new SQLiteAgent(MainActivity.this);
         flater = LayoutInflater.from(this);
         sQLiteAgent.openDB();
+        bodyData = sQLiteAgent.showSqliteBodyData();
+        foodData = sQLiteAgent.showSqliteFoodData();
         HomePage();
     }
 
@@ -112,11 +115,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void ImportDataBase() {
         breakfast[0] = new String[]{"火腿三明治", "巧克力吐司", "肉包", "飯糰", "稀飯", "蘿蔔糕", "饅頭", "燒餅"};
-        breakfast[1] = new String[]{"231.5", "194.6", "225", "281", "140", "90", "280", "214", "263"};
+        breakfast[1] = new String[]{"231", "194", "225", "281", "140", "90", "280", "214", "263"};
         breakfast[2] = new String[]{String.valueOf(R.drawable.ham_sandwich), String.valueOf(R.drawable.chocolate_toast), String.valueOf(R.drawable.meat_buns), String.valueOf(R.drawable.onigiri), String.valueOf(R.drawable.porridge), String.valueOf(R.drawable.carrotcake), String.valueOf(R.drawable.steamed_bread), String.valueOf(R.drawable.shaobing)};
 
         main_meal[0] = new String[]{"煎餃", "豬肉漢堡 ", "香雞堡", "滷肉飯", "蔥抓餅", "炒飯", "炸醬麵", "牛肉麵", "乾麵", "肉圓"};
-        main_meal[1] = new String[]{"910.8", "420", "440", "375", "404", "515", "650", "470", "425", "494"};
+        main_meal[1] = new String[]{"910", "420", "440", "375", "404", "515", "650", "470", "425", "494"};
         main_meal[2] = new String[]{String.valueOf(R.drawable.gyoza), String.valueOf(R.drawable.pork_burger), String.valueOf(R.drawable.chicken_burger), String.valueOf(R.drawable.braised_pork_rice), String.valueOf(R.drawable.scallion_pancake), String.valueOf(R.drawable.fried_rice), String.valueOf(R.drawable.dry_noodles_with_minced_pork_and_cucumber), String.valueOf(R.drawable.beef_noodles), String.valueOf(R.drawable.dry_noodles), String.valueOf(R.drawable.meatballs)};
 
         soup[0] = new String[]{"蛋花湯", "豬血湯", "貢丸湯", "餛飩湯", "肉羹湯"};
@@ -333,11 +336,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         view[view_counter] = flater.inflate(R.layout.food_memory, null);
         ListFoodData();
         ListView ls = (ListView) view[view_counter].findViewById(R.id.listView2);
+        TextView textView = (TextView) view[view_counter].findViewById(R.id.textView34);
         myArrayAdapter2 = new ListFoodListAdapter(MainActivity.this, foodData);
         ls.setAdapter(myArrayAdapter2);
         myArrayAdapter2.notifyDataSetChanged();
+        int calorie = ReportTodayCalorie();
+        textView.setText(String.valueOf(calorie));
         main.removeAllViews();
         main.addView(view[view_counter]);
+        Button btn = (Button) view[view_counter].findViewById(R.id.button);
+        btn.setOnClickListener(this);
     }
 
     private void FoodDetail_Normal() {
@@ -345,9 +353,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         view[view_counter] = flater.inflate(R.layout.food_memory, null);
         ListFoodData();
         ListView ls = (ListView) view[view_counter].findViewById(R.id.listView2);
+        TextView textView = (TextView) view[view_counter].findViewById(R.id.textView34);
         myArrayAdapter2 = new ListFoodListAdapter(MainActivity.this, foodData);
         ls.setAdapter(myArrayAdapter2);
         myArrayAdapter2.notifyDataSetChanged();
+        int calorie = ReportTodayCalorie();
+        textView.setText(String.valueOf(calorie));
         main.removeAllViews();
         main.addView(view[view_counter]);
         Button btn = (Button) view[view_counter].findViewById(R.id.button);
@@ -360,8 +371,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private int ReportTodayCalorie() {
         double calorie = 0;
+        int todayCalorie = 0;
         int count = bodyData.size();
-        calorie = (665 + 1.38 * bodyData.get(count).weigth + 5 * bodyData.get(count).length - 6.8 * bodyData.get(count).old) * bodyData.get(count).sport;
+        if (count != 0) {
+            calorie = (665 + 1.38 * bodyData.get(count - 1).weigth + 5 * bodyData.get(count - 1).length - 6.8 * bodyData.get(count - 1).old) * bodyData.get(count - 1).sport;
+            int size = foodData.size();
+            for (int i = 0; i < size; i++) {
+                if (foodData.get(i).breakfast != 0)
+                    todayCalorie = todayCalorie + Integer.parseInt(breakfast[1][foodData.get(i).breakfast - 1]);
+                if (foodData.get(i).main_menu != 0)
+                    todayCalorie = todayCalorie + Integer.parseInt(main_meal[1][foodData.get(i).main_menu - 1]);
+                if (foodData.get(i).drink != 0)
+                    todayCalorie = todayCalorie + Integer.parseInt(drink[1][foodData.get(i).drink - 1]);
+                if (foodData.get(i).desert != 0)
+                    todayCalorie = todayCalorie + Integer.parseInt(dessert[1][foodData.get(i).desert - 1]);
+                if (foodData.get(i).soup != 0)
+                    todayCalorie = todayCalorie + Integer.parseInt(soup[1][foodData.get(i).soup - 1]);
+            }
+        }
+        calorie = calorie - todayCalorie;
         return (int) calorie;
     }
 
