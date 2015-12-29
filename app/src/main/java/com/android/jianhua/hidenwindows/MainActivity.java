@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String[][] drink = new String[3][];
     String[][] dessert = new String[3][];
     SQLiteAgent sQLiteAgent;
+    boolean status = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -223,6 +224,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 main.removeAllViews();
                 main.addView(view[view_counter]);
                 myArrayAdapter2.notifyDataSetChanged();
+                int calorie = ReportTodayCalorie();
+                TextView textView = (TextView) view[view_counter].findViewById(R.id.textView34);
+                TextView textView2 = (TextView) view[view_counter].findViewById(R.id.textView35);
+                textView.setText(String.valueOf(calorie));
+                if(status) {
+                    if (calorie < -500)
+                        textView2.setText("吃太多了，進食7分飽就好囉");
+                    else if (calorie > 500)
+                        textView2.setText("吃太少了，要多吃一點噢");
+                    else
+                        textView2.setText("剛剛好噢!");
+                }
+                else {
+                    if (calorie < -100)
+                        textView2.setText("吃太多了，你真的想減肥嘛？");
+                    else if (calorie > 700)
+                        textView2.setText("吃太少了，減肥還是要吃飯噢");
+                    else
+                        textView2.setText("剛剛好，努力會變苗條噢");
+                }
             }
         });
         cb1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -341,6 +362,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void FoodDetail_Reduce() {
+        status = false;
         view_counter = view_counter + 1;
         view[view_counter] = flater.inflate(R.layout.food_memory, null);
         ListFoodData();
@@ -367,6 +389,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void FoodDetail_Normal() {
+        status = true;
         view_counter = view_counter + 1;
         view[view_counter] = flater.inflate(R.layout.food_memory, null);
         ListFoodData();
