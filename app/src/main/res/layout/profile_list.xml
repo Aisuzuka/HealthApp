@@ -8,7 +8,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
-        android:id="@+id/textView22" />
+        android:id="@+id/textView22"
+        android:textSize="30dp" />
 
     <LinearLayout
         android:orientation="horizontal"

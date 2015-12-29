@@ -343,9 +343,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         myArrayAdapter2.notifyDataSetChanged();
         int calorie = ReportTodayCalorie();
         textView.setText(String.valueOf(calorie));
-        if (calorie < -500)
+        if (calorie < -100)
             textView2.setText("吃太多了，你真的想減肥嘛？");
-        else if (calorie > 500)
+        else if (calorie > 700)
             textView2.setText("吃太少了，減肥還是要吃飯噢");
         else
             textView2.setText("剛剛好，努力會變苗條噢");

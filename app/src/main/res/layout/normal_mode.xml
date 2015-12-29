@@ -133,7 +133,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="OK"
+                android:text="送出資料"
                 android:id="@+id/button3" />
         </LinearLayout>
 
