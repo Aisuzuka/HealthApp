@@ -337,11 +337,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ListFoodData();
         ListView ls = (ListView) view[view_counter].findViewById(R.id.listView2);
         TextView textView = (TextView) view[view_counter].findViewById(R.id.textView34);
+        TextView textView2 = (TextView) view[view_counter].findViewById(R.id.textView35);
         myArrayAdapter2 = new ListFoodListAdapter(MainActivity.this, foodData);
         ls.setAdapter(myArrayAdapter2);
         myArrayAdapter2.notifyDataSetChanged();
         int calorie = ReportTodayCalorie();
         textView.setText(String.valueOf(calorie));
+        if (calorie < -500)
+            textView2.setText("吃太多了，你真的想減肥嘛？");
+        else if (calorie > 500)
+            textView2.setText("吃太少了，減肥還是要吃飯噢");
+        else
+            textView2.setText("剛剛好，努力會變苗條噢");
         main.removeAllViews();
         main.addView(view[view_counter]);
         Button btn = (Button) view[view_counter].findViewById(R.id.button);
@@ -354,11 +361,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ListFoodData();
         ListView ls = (ListView) view[view_counter].findViewById(R.id.listView2);
         TextView textView = (TextView) view[view_counter].findViewById(R.id.textView34);
+        TextView textView2 = (TextView) view[view_counter].findViewById(R.id.textView35);
         myArrayAdapter2 = new ListFoodListAdapter(MainActivity.this, foodData);
         ls.setAdapter(myArrayAdapter2);
         myArrayAdapter2.notifyDataSetChanged();
         int calorie = ReportTodayCalorie();
         textView.setText(String.valueOf(calorie));
+        if (calorie < -500)
+            textView2.setText("吃太多了，進食7分飽就好囉");
+        else if (calorie > 500)
+            textView2.setText("吃太少了，要多吃一點噢");
+        else
+            textView2.setText("剛剛好噢!");
         main.removeAllViews();
         main.addView(view[view_counter]);
         Button btn = (Button) view[view_counter].findViewById(R.id.button);

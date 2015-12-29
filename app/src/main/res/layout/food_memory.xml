@@ -23,17 +23,49 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="總熱量:"
+                    android:text="今日攝取清單"
                     android:id="@+id/textView13"
-                    android:textSize="40dp" />
+                    android:textSize="24dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="還可攝取"
+                        android:textSize="24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="test"
+                        android:id="@+id/textView34"
+                        android:textSize="60dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="大卡"
+                        android:textSize="24dp"
+                        android:id="@+id/textView36" />
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="test"
-                    android:id="@+id/textView34"
-                    android:textSize="60dp" />
+                    android:id="@+id/textView35"
+                    android:textSize="24dp"
+                    android:layout_gravity="center_horizontal" />
 
             </LinearLayout>
 
