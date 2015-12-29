@@ -84,6 +84,12 @@
             android:text="吃飯囉"
             android:id="@+id/button"
             android:layout_gravity="right" />
+
+        <FrameLayout
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/clearData"
+            android:layout_gravity="bottom|right"></FrameLayout>
     </FrameLayout>
 
 </LinearLayout>

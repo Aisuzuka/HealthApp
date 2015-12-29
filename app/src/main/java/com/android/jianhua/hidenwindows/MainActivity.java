@@ -138,12 +138,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.imageView:
-                Toast.makeText(MainActivity.this, "正常模式", Toast.LENGTH_SHORT).show();
-                FoodDetail_Normal();
+                if (bodyData.size() == 0)
+                    Toast.makeText(MainActivity.this, "請先記錄身體狀況", Toast.LENGTH_SHORT).show();
+                else
+                    FoodDetail_Normal();
                 break;
             case R.id.imageView2:
-                Toast.makeText(MainActivity.this, "減重模式", Toast.LENGTH_SHORT).show();
-                FoodDetail_Reduce();
+                if (bodyData.size() == 0)
+                    Toast.makeText(MainActivity.this, "請先記錄身體狀況", Toast.LENGTH_SHORT).show();
+                else
+                    FoodDetail_Reduce();
                 break;
             case R.id.imageView3:
                 Toast.makeText(MainActivity.this, "設定", Toast.LENGTH_SHORT).show();
@@ -166,6 +170,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.button3:
                 AddBodyData();
+                break;
+            case R.id.clearData:
+                foodData.clear();
+                sQLiteAgent.addSqliteFoodData(foodData);
+                myArrayAdapter2.notifyDataSetChanged();
                 break;
         }
     }
@@ -336,6 +345,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         view[view_counter] = flater.inflate(R.layout.food_memory, null);
         ListFoodData();
         ListView ls = (ListView) view[view_counter].findViewById(R.id.listView2);
+        FrameLayout clear = (FrameLayout) view[view_counter].findViewById(R.id.clearData);
         TextView textView = (TextView) view[view_counter].findViewById(R.id.textView34);
         TextView textView2 = (TextView) view[view_counter].findViewById(R.id.textView35);
         myArrayAdapter2 = new ListFoodListAdapter(MainActivity.this, foodData);
@@ -353,6 +363,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         main.addView(view[view_counter]);
         Button btn = (Button) view[view_counter].findViewById(R.id.button);
         btn.setOnClickListener(this);
+        clear.setOnClickListener(this);
     }
 
     private void FoodDetail_Normal() {
@@ -360,6 +371,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         view[view_counter] = flater.inflate(R.layout.food_memory, null);
         ListFoodData();
         ListView ls = (ListView) view[view_counter].findViewById(R.id.listView2);
+        FrameLayout clear = (FrameLayout) view[view_counter].findViewById(R.id.clearData);
         TextView textView = (TextView) view[view_counter].findViewById(R.id.textView34);
         TextView textView2 = (TextView) view[view_counter].findViewById(R.id.textView35);
         myArrayAdapter2 = new ListFoodListAdapter(MainActivity.this, foodData);
@@ -377,6 +389,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         main.addView(view[view_counter]);
         Button btn = (Button) view[view_counter].findViewById(R.id.button);
         btn.setOnClickListener(this);
+        clear.setOnClickListener(this);
     }
 
     private void ListFoodData() {

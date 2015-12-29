@@ -5,8 +5,8 @@
     android:weightSum="1">
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:id="@+id/imageView5" />
 
     <TextView
@@ -15,6 +15,6 @@
         android:text="New Text"
         android:id="@+id/textView6"
         android:layout_weight="0.07"
-        android:layout_gravity="bottom" />
+        android:layout_gravity="center_vertical" />
 
 </LinearLayout>
