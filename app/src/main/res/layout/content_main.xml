@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="#f8f3f3"
     tools:context="com.android.jianhua.hidenwindows.FullscreenActivity">
 
     <LinearLayout
@@ -78,13 +78,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="身體狀況"
                 android:id="@+id/textView25" />
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="315dp"
+                android:layout_height="340dp"
                 android:id="@+id/imageView3"
                 android:background="@drawable/body"
                 android:layout_margin="5dp" />

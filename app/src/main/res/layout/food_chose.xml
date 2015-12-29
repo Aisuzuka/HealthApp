@@ -11,7 +11,7 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dip"
+            android:layout_marginLeft="2dip"
             android:text="早餐"
             android:id="@+id/checkBox"
             android:checked="false" />
@@ -19,7 +19,7 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dip"
+            android:layout_marginLeft="13dip"
             android:text="主餐"
             android:id="@+id/checkBox2"
             android:checked="false" />
@@ -27,7 +27,7 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dip"
+            android:layout_marginLeft="13dip"
             android:text="湯品"
             android:id="@+id/checkBox3"
             android:checked="false" />
@@ -35,7 +35,7 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dip"
+            android:layout_marginLeft="13dip"
             android:text="飲料"
             android:id="@+id/checkBox4"
             android:checked="false" />
@@ -43,7 +43,7 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dip"
+            android:layout_marginLeft="13dip"
             android:text="點心"
             android:id="@+id/checkBox5"
             android:checked="false" />
