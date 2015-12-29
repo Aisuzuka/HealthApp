@@ -23,7 +23,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="熱量(卡):"
+                    android:text="總熱量:"
                     android:id="@+id/textView13"
                     android:textSize="40dp" />
 
@@ -33,13 +33,13 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="test"
                     android:id="@+id/textView34"
-                    android:textSize="40dp" />
+                    android:textSize="60dp" />
 
             </LinearLayout>
 
             <ListView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="257dp"
                 android:layout_marginTop="50dip"
                 android:id="@+id/listView2" />
 
